@@ -1,517 +1,374 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mimarlık Web Sitesi - Siyah Tema</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Comfortaa", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: <weight>;
-            font-style: normal;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mimarlık Web Sitesi - Siyah Tema</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Comfortaa", sans-serif;
+    }
 
-        body {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-            line-height: 1.6;
-            scroll-behavior: smooth;
-        }
+    body {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      scroll-behavior: smooth;
+      overflow-x: hidden; /* Yatay kaydırmayı engellemek için */
+    }
 
-        /* Header ve Navigasyon */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-        }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
 
-        .logo {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            transition: transform 0.3s ease;
-        }
+    .logo {
+      width: 75px;
+    }
 
-        .logo:hover {
-            transform: translateX(-50%) scale(1.1);
-        }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1002; /* Menüden üstte olması için */
+    }
 
-        /* Hamburger Menü */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 20px;
-            cursor: pointer;
-            z-index: 1001;
-        }
+    .hamburger span {
+      height: 3px;
+      background: #e0e0e0;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
 
-        .hamburger span {
-            width: 100%;
-            height: 3px;
-            background-color: #e0e0e0;
-            transition: all 0.3s ease;
-        }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
 
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-        }
+    .nav-menu li {
+      margin: 0 20px;
+    }
 
-        .nav-menu li {
-            margin: 0 20px;
-        }
+    .nav-menu a {
+      text-decoration: none;
+      color: #e0e0e0;
+      font-weight: 500;
+      position: relative;
+    }
 
-        .nav-menu li a {
-            text-decoration: none;
-            color: #e0e0e0;
-            font-size: 16px;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        /*Nav Bar Beyaz*/
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: #fff;
+      transition: width 0.3s ease;
+    }
 
-        .nav-menu li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: #ffffff;
-            transition: width 0.3s ease;
-        }
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
 
-        .nav-menu li a:hover::after {
-            width: 100%;
-        }
-        /*Alt çizgi rengi*/
-        .nav-menu li a:hover {
-            color: #ff2d2d;
-        }
+    .nav-menu a:hover {
+      color: #ff2d2d;
+    }
 
-        /* Genel Section Stili */
-        section {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 20px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
+    section {
+      padding: 100px 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
 
-        section.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        /* Ana Sayfa */
-        #ana-sayfa {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518609878373-06d0b410cf0d');
-            background-size: cover;
-            background-position: center;
-            color: #e0e0e0;
-            font-family: "Montserrat", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: <weight>;
-            font-style: normal;
-            position: relative;
-            overflow: hidden;
-        }
+    #ana-sayfa {
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518609878373-06d0b410cf0d');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+    }
 
-        #ana-sayfa .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 1s ease;
-            background-size: cover;
-            background-position: center;
-        }
+    #ana-sayfa h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-family: "Montserrat", sans-serif;
+    }
 
-        #ana-sayfa .slide.active {
-            opacity: 1;
-        }
+    #ana-sayfa p {
+      max-width: 600px;
+      margin: auto;
+      font-size: 18px;
+    }
 
-        #ana-sayfa h1 {
-            font-size: 48px;
-            font-family: "Montserrat", sans-serif;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+    #hakkinda {
+      background-color: #262626;
+    }
 
-        #ana-sayfa p {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto;
-            font-family: "Montserrat", sans-serif;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
+    #hakkinda h2,
+    #projeler h2,
+    #iletisim h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #cf271b;
+    }
 
-        /* Hakkında */
-        #hakkinda {
-            background-color: #262626;
-            position: relative;
-            overflow: hidden;
-        }
+    #hakkinda p {
+      max-width: 800px;
+      margin: auto;
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+    }
 
-        #hakkinda .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
+    #projeler {
+      background-color: #1a1a1a;
+    }
 
-        #hakkinda .slide.active {
-            opacity: 1;
-        }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
 
-        #hakkinda h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #d4a373;
-        }
+    .project-card {
+      background-color: #262626;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
 
-        #hakkinda p {
-            font-family: "Montserrat", sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 16px;
-        }
+    .project-card:hover {
+      transform: translateY(-10px);
+    }
 
-        /* Projeler */
-        #projeler {
-            background-color: #1a1a1a;
-        }
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
 
-        #projeler h2 {
-            font-family: "Montserrat", sans-serif;
-            font-size: 36px;
-            margin-bottom: 40px;
-            color: #d4a373;
-        }
+    .project-card h3 {
+      padding: 20px;
+    }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .project-card p {
+      padding: 0 20px 20px;
+      color: #b0b0b0;
+    }
 
-        .project-card {
-            background-color: #262626;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
+    #iletisim {
+      background-color: #262626;
+    }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
+    footer {
+      background: #0d0d0d;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
 
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+    /* Kapatma butonu stili */
+    .nav-menu .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #e0e0e0;
+      z-index: 1003; /* Hamburger ve menüden daha yüksek */
+      display: none; /* Varsayılan olarak gizli */
+    }
 
-        .project-card h3 {
-            font-size: 24px;
-            margin: 20px;
-            color: #e0e0e0;
-        }
+    /* Mobil uyumluluk */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex; /* Hamburger ikonunu göster */
+      }
 
-        .project-card p {
-            margin: 0 20px 20px;
-            font-size: 14px;
-            color: #b0b0b0;
-        }
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100vw; /* Menüyü ekranın sağının tam dışına konumlandır */
+        height: 100vh;
+        width: 250px; /* Menünün genişliği */
+        background-color: #0d0d0d;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease; /* 'right' özelliğiyle yumuşak geçiş */
+        z-index: 1001; /* Diğer içeriklerin üzerinde */
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5); /* Menüye gölge ekle */
+      }
 
-        /* İletişim */
-        #iletisim {
-            background-color: #262626;
-        }
+      .nav-menu.active {
+        right: 0 !important; /* Menü aktifken ekranın sağına sıfırla, !important ile öncelik ver */
+      }
 
-        #iletisim h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #d4a373;
-        }
+      .nav-menu li {
+        margin: 20px 0;
+      }
 
-        #iletisim p {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #0d0d0d;
-            color: #e0e0e0;
-            text-align: center;
-            padding: 20px;
-        }
-
-        footer p {
-            font-size: 14px;
-        }
-
-        /* Responsive Tasarım */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                height: 100vh;
-                width: 250px;
-                background-color: #0d0d0d;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: right 0.3s ease;
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .nav-menu li {
-                margin: 20px 0;
-            }
-
-            .nav-menu li a {
-                font-size: 20px;
-            }
-
-            .logo {
-                width: 80px;
-            }
-            
-            #ana-sayfa h1 {
-                font-size: 36px;
-            }
-            
-            #ana-sayfa p {
-                font-size: 16px;
-            }
-        }
-    </style>
+      .nav-menu .close-btn {
+        display: block; /* Mobil menüde kapatma ikonunu göster */
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <img src="https://via.placeholder.com/100x50?text=Logo" alt="Logo" class="logo">
-            <ul class="nav-menu">
-                <li><a href="#ana-sayfa">Ana Sayfa</a></li>
-                <li><a href="#hakkinda">Hakkında</a></li>
-                <li><a href="#projeler">Projeler</a></li>
-                <li><a href="#iletisim">İletişim</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <div class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <img src="width_150.jpeg" alt="Logo" class="logo" />
+      <ul class="nav-menu">
+        <li class="close-btn">X</li> <li><a href="#ana-sayfa">Ana Sayfa</a></li>
+        <li><a href="#hakkinda">Hakkında</a></li>
+        <li><a href="#projeler">Projeler</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <section id="ana-sayfa">
-        <div class="slide active" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518609878373-06d0b410cf0d') center/cover;">
-            <h1>Mimarlıkta Sanat ve İşlevsellik</h1>
-            <p>Modern, sürdürülebilir ve estetik çözümlerle hayallerinizi gerçeğe dönüştürüyoruz.</p>
-        </div>
-        <div class="slide" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-14973662105479-4275897d4737') center/cover;">
-            <h1>Yenilikçi Tasarımlar</h1>
-            <p>Geleceğin mimarisini bugünden şekillendiriyoruz.</p>
-        </div>
-        <div class="slide" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1513584684374-8bab748fbf90') center/cover;">
-            <h1>Sürdürülebilir Çözümler</h1>
-            <p>Çevre dostu malzemeler ve enerji verimli tasarımlarla geleceğe yatırım yapın.</p>
-        </div>
-    </section>
+  <section id="ana-sayfa">
+    <div>
+      <h1>Mimarlıkta Sanat ve İşlevsellik</h1>
+      <p>Modern, sürdürülebilir ve estetik çözümlerle hayallerinizi gerçeğe dönüştürüyoruz.</p>
+    </div>
+  </section>
 
-    <section id="hakkinda">
-        <div class="slide active">
-            <h2>Hakkımızda</h2>
-            <p>20 yılı aşkın deneyimimizle, yenilikçi mimari tasarımlar sunuyoruz. Her proje, müşterilerimizin ihtiyaçlarına ve çevreye duyarlı bir şekilde özel olarak tasarlanır.</p>
-        </div>
-        <div class="slide">
-            <h2>Vizyonumuz</h2>
-            <p>Mimarlık alanında sınırları zorlayarak, insanların yaşam kalitesini artıran mekanlar yaratmayı hedefliyoruz.</p>
-        </div>
-        <div class="slide">
-            <h2>Ekibimiz</h2>
-            <p>Alanında uzman, yaratıcı ve deneyimli ekibimizle her projeye özel çözümler üretiyoruz.</p>
-        </div>
-    </section>
+  <section id="hakkinda">
+    <div>
+      <h2>Hakkımızda</h2>
+      <p>20 yılı aşkın deneyimimizle, yenilikçi mimari tasarımlar sunuyoruz. Her proje, müşterilerimizin ihtiyaçlarına ve çevreye duyarlı bir şekilde özel olarak tasarlanır.</p>
+    </div>
+  </section>
 
-    <section id="projeler">
-        <div>
-            <h2>Projelerimiz</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1518609878373-06d0b410cf0d" alt="Proje 1">
-                    <h3>Modern Villa</h3>
-                    <p>Minimalist tasarım ve çevre dostu malzemelerle inşa edilmiş bir yaşam alanı.</p>
-                </div>
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-14973662105479-4275897d4737" alt="Proje 2">
-                    <h3>Ofis Kompleksi</h3>
-                    <p>Verimliliği artıran, modern bir iş merkezi.</p>
-                </div>
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90" alt="Proje 3">
-                    <h3>Kentsel Konut</h3>
-                    <p>Şehir yaşamına uygun, konforlu ve şık daireler.</p>
-                </div>
-            </div>
+  <section id="projeler">
+    <div>
+      <h2>Projelerimiz</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <img src="proje1.jpg" alt="Modern Villa">
+          <h3>Modern Villa</h3>
+          <p>Minimalist tasarım ve çevre dostu malzemelerle inşa edilmiş bir yaşam alanı.</p>
         </div>
-    </section>
-
-    <section id="iletisim">
-        <div>
-            <h2>İletişim</h2>
-            <p>E-posta: info@mimarlik.com</p>
-            <p>Telefon: +90 123 456 7890</p>
-            <p>Adres: Örnek Mahallesi, Mimarlık Caddesi No:1, İstanbul, Türkiye</p>
+        <div class="project-card">
+          <img src="proje2.jpg" alt="Ofis Kompleksi">
+          <h3>Ofis Kompleksi</h3>
+          <p>Verimliliği artıran, modern bir iş merkezi.</p>
         </div>
-    </section>
+        <div class="project-card">
+          <img src="proje3.jpeg" alt="Kentsel Konut">
+          <h3>Kentsel Konut</h3>
+          <p>Şehir yaşamına uygun, konforlu ve şık daireler.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>© 2025 Mimarlık. Tüm hakları saklıdır.</p>
-    </footer>
+  <section id="iletisim">
+    <div>
+      <h2>İletişim</h2>
+      <p>E-posta: info@mimarlik.com</p>
+      <p>Telefon: +90 123 456 7890</p>
+      <p>Adres: Örnek Mahallesi, Mimarlık Caddesi No:1, İstanbul, Türkiye</p>
+    </div>
+  </section>
 
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+  <footer>
+    <p>© 2025 Mimarlık. Tüm hakları saklıdır.</p>
+  </footer>
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const closeBtn = document.querySelector('.close-btn'); // Kapatma butonu seçildi
+
+    // Hamburger menüye tıklama olayı
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      // console.log('Hamburger clicked! navMenu active status:', navMenu.classList.contains('active')); // Debug için
+    });
+
+    // Kapatma butonuna tıklama olayı
+    if (closeBtn) { // closeBtn'in varlığını kontrol et
+        closeBtn.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
         });
+    }
 
-        // Menü linklerine tıklandığında menüyü kapat
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
+    // Menü öğelerine tıklayınca menüyü kapat (mobil deneyimi için)
+    document.querySelectorAll('.nav-menu a').forEach(item => {
+        item.addEventListener('click', () => {
+            // Sadece mobil görünümde (768px altında) menüyü kapat
+            if (window.innerWidth <= 768) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
-            });
+            }
         });
+    });
 
-        // Slayt gösterisi fonksiyonları
-        function initSlideshow(sectionId) {
-            const slides = document.querySelectorAll(`#${sectionId} .slide`);
-            let currentSlide = 0;
-            
-            if (slides.length === 0) return;
-            
-            // Tüm slaytları gizle
-            slides.forEach(slide => slide.classList.remove('active'));
-            
-            // İlk slaytı göster
-            slides[0].classList.add('active');
-            
-            // Slaytları otomatik değiştir
-            setInterval(() => {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }, 5000); // 5 saniyede bir değiştir
+    // Sayfa bölümlerinin animasyonu (scroll esnasında görünür olma)
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + window.innerHeight;
+      sections.forEach(section => {
+        if (scrollY > section.offsetTop + 100) {
+          section.classList.add('active');
         }
+      });
+    });
 
-        // Sayfa yüklendiğinde slayt gösterilerini başlat
-        document.addEventListener('DOMContentLoaded', () => {
-            initSlideshow('ana-sayfa');
-            initSlideshow('hakkinda');
-            
-            // Sayfa bölümlerine animasyon ekle
-            const sections = document.querySelectorAll('section');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-
-        // Navigasyon linklerine tıklandığında slayt gösterisini sıfırla
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                if (targetSection && (targetId === 'ana-sayfa' || targetId === 'hakkinda')) {
-                    const slides = targetSection.querySelectorAll('.slide');
-                    if (slides.length > 0) {
-                        slides.forEach(slide => slide.classList.remove('active'));
-                        slides[0].classList.add('active');
-                    }
-                }
-            });
-        });
-    </script>
+    // Sayfa yüklendiğinde ana sayfa bölümünü aktif et
+    window.addEventListener('load', () => {
+      document.querySelector('#ana-sayfa').classList.add('active');
+    });
+  </script>
 </body>
 </html>
